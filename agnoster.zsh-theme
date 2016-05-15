@@ -76,6 +76,11 @@ prompt_context() {
   fi
 }
 
+# Show the time
+prompt_time(){
+  prompt_segment blue default %T
+}
+
 # Git: branch/detached head, dirty status
 prompt_git() {
   local color ref
@@ -125,6 +130,7 @@ prompt_agnoster_main() {
   RETVAL=$?
   CURRENT_BG='NONE'
   prompt_status
+  prompt_time
   prompt_context
   prompt_dir
   prompt_git

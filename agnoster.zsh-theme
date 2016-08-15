@@ -36,6 +36,7 @@ DETACHED="\u27a6"
 CROSS="\u2718"
 LIGHTNING="\u26a1"
 GEAR="\u2699"
+STAR="\u2605"
 
 # Begin a segment
 # Takes two arguments, background and foreground. Both can be omitted,
@@ -72,13 +73,13 @@ prompt_context() {
   local user=`whoami`
 
   if [[ "$user" != "$DEFAULT_USER" || -n "$SSH_CONNECTION" ]]; then
-    prompt_segment $PRIMARY_FG default " %(!.%{%F{yellow}%}.)$user@%m "
+    prompt_segment white red " %(!.%{%F{yellow}%}.)$STAR $user $STAR "
   fi
 }
 
 # Show the time
 prompt_time(){
-  prompt_segment blue default %T
+  prompt_segment black default %T
 }
 
 # Git: branch/detached head, dirty status
@@ -108,7 +109,7 @@ prompt_git() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment blue $PRIMARY_FG ' %~ '
+  prompt_segment black white ' %~ '
 }
 
 # Status:
@@ -122,7 +123,7 @@ prompt_status() {
   [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}$LIGHTNING"
   [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}$GEAR"
 
-  [[ -n "$symbols" ]] && prompt_segment $PRIMARY_FG default " $symbols "
+  [[ -n "$symbols" ]] && prompt_segment white default " $symbols "
 }
 
 ## Main prompt

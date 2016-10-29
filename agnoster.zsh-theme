@@ -77,7 +77,7 @@ prompt_end() {
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment white red "%(!.%{%F{yellow}%}.)$STAR $USER@%m $STAR"
+    prompt_segment green red "%(!.%{%F{yellow}%}.)$STAR"
   fi
 }
 
@@ -162,7 +162,7 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment black white '%~'
+  prompt_segment black green '%~'
 }
 
 # Virtualenv: current working virtualenv
@@ -187,16 +187,10 @@ prompt_status() {
   [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
 }
 
-# Show the time
-prompt_time(){
-  prompt_segment black default %T
-}
-
 ## Main prompt
 build_prompt() {
   RETVAL=$?
   prompt_status
-  prompt_time
   prompt_virtualenv
   prompt_context
   prompt_dir
